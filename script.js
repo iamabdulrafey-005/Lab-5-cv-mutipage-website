@@ -1,19 +1,22 @@
 /**
  * Abdul Rafay — Multi-Page Executive CV & Portfolio Interactive Engine
  * 
- * 1. Reactive Background Watermark & Dynamic Atmospheric Aura
- * 2. Real-time Telemetry HUD Console & Runtime Simulation
- * 3. Frontend Kinetic Click Shockwaves & Neon Ripples
- * 4. 3D Card Mouse Perspective Tilt & Cursor Spotlight
- * 5. Interactive Skill Filters & Dynamic Color Morphing
- * 6. Elastic Certificate Lightbox Modal & ESC Dismissal
- * 7. Mobile Navigation Toggle
+ * 1. 10-Second Event Color Overdrive System (Frontend & Backend Synced)
+ * 2. Section Live Background Animation Canvas Engine
+ * 3. Mouse Drag Chromatic Flow Interaction
+ * 4. Reactive Background Watermark & Dynamic Atmospheric Aura
+ * 5. Real-time Telemetry HUD Console & Runtime Simulation
+ * 6. Frontend Kinetic Click Shockwaves & Neon Ripples
+ * 7. 3D Card Mouse Perspective Tilt & Cursor Spotlight
+ * 8. Interactive Skill Filters & Dynamic Color Morphing
+ * 9. Elastic Certificate Lightbox Modal & ESC Dismissal
+ * 10. Mobile Navigation Toggle
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // ═════════════════════════════════════════════════════════════════
-  // 1. INJECT REQUIRED GLOBAL SHELLS (AURA, WATERMARK, HUD, LIGHTBOX)
+  // 1. INJECT GLOBAL SHELLS (AURA, WATERMARK, HUD, CANVAS, SPOTLIGHT)
   // ═════════════════════════════════════════════════════════════════
   
   // Ambient Aura layer
@@ -21,6 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const aura = document.createElement('div');
     aura.className = 'ambient-aura';
     document.body.prepend(aura);
+  }
+
+  // Overdrive Aura layer
+  if (!document.getElementById('overdriveAura')) {
+    const odAura = document.createElement('div');
+    odAura.id = 'overdriveAura';
+    odAura.className = 'overdrive-aura';
+    odAura.setAttribute('aria-hidden', 'true');
+    document.body.prepend(odAura);
+  }
+
+  // Live Background Animation Canvas
+  let canvas = document.getElementById('sectionLiveCanvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'sectionLiveCanvas';
+    canvas.className = 'live-bg-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.prepend(canvas);
+  }
+
+  // Mouse Drag Chromatic Spotlight
+  let dragSpotlight = document.getElementById('mouseDragSpotlight');
+  if (!dragSpotlight) {
+    dragSpotlight = document.createElement('div');
+    dragSpotlight.id = 'mouseDragSpotlight';
+    dragSpotlight.className = 'mouse-drag-spotlight';
+    dragSpotlight.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(dragSpotlight);
   }
 
   // Kinetic Watermark layer
@@ -45,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="hud-status">
           <span class="hud-indicator"></span>
           <span class="hud-title">SYSTEM MONITOR :: RUNTIME</span>
+          <span class="hud-countdown" id="hudCountdown">10s OVERDRIVE</span>
         </div>
         <span class="hud-latency" id="hudLatency">ONLINE</span>
       </div>
@@ -82,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const hudTerminal = document.getElementById('hudTerminal');
   const hudLatency = document.getElementById('hudLatency');
+  const hudCountdown = document.getElementById('hudCountdown');
   let hudIdleTimer = null;
 
   // Telemetry Log Function
@@ -90,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hudElement) hudElement.classList.add('is-active');
 
-    // Fast simulated latency (0.8ms - 2.4ms)
     const randomLatency = (Math.random() * 1.6 + 0.8).toFixed(1) + 'ms';
     if (hudLatency) hudLatency.textContent = randomLatency;
 
@@ -105,14 +138,242 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clearTimeout(hudIdleTimer);
     hudIdleTimer = setTimeout(() => {
-      if (hudElement) hudElement.classList.remove('is-active');
-      if (hudLatency) hudLatency.textContent = 'ONLINE';
-    }, 3800);
+      if (hudElement && !document.body.classList.contains('is-overdrive')) {
+        hudElement.classList.remove('is-active');
+        if (hudLatency) hudLatency.textContent = 'ONLINE';
+      }
+    }, 4000);
   };
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 2. PAGE CONTEXT DETECTION & WATERMARK MORPHING
+  // 2. 10-SECOND EVENT COLOR OVERDRIVE SYSTEM (FRONTEND & BACKEND)
+  // ═════════════════════════════════════════════════════════════════
+  let overdriveTimer = null;
+  let countdownInterval = null;
+  let remainingSeconds = 10;
+  let activeFocusCard = null;
+
+  function triggerOverdrive(category, element = null) {
+    clearTimeout(overdriveTimer);
+    clearInterval(countdownInterval);
+
+    // Remove focus glow from any previously focused card
+    if (activeFocusCard) {
+      activeFocusCard.classList.remove('section-overdrive-focus');
+    }
+
+    // Set active overdrive theme
+    document.body.setAttribute('data-overdrive', category);
+    document.body.classList.add('is-overdrive');
+
+    // Focus target card or closest card
+    if (element) {
+      const targetCard = element.closest('.content-card, .timeline-card, .edu-card, .contact-box, .cert-card, .quick-hub-card') || element;
+      targetCard.classList.add('section-overdrive-focus');
+      activeFocusCard = targetCard;
+    }
+
+    // Set background animation mode to matched section
+    currentSectionMode = category;
+
+    // Watermark burst
+    if (watermarkText) {
+      watermarkText.classList.remove('is-pulsing');
+      void watermarkText.offsetWidth; // force reflow
+      watermarkText.classList.add('is-pulsing');
+    }
+
+    // Update HUD Countdown badge
+    remainingSeconds = 10;
+    if (hudCountdown) {
+      hudCountdown.textContent = `${remainingSeconds}s OVERDRIVE`;
+      hudCountdown.classList.add('is-active');
+    }
+
+    pushTelemetryLog(`<strong>[OVERDRIVE: 10s]</strong> ${category.toUpperCase()} ACTIVE :: Shaders &amp; theme synchronized`, true);
+
+    // 1-second interval countdown
+    countdownInterval = setInterval(() => {
+      remainingSeconds--;
+      if (hudCountdown) {
+        hudCountdown.textContent = `${remainingSeconds}s OVERDRIVE`;
+      }
+
+      if (remainingSeconds <= 0) {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+
+    // Auto-reset after exactly 10 seconds
+    overdriveTimer = setTimeout(() => {
+      document.body.removeAttribute('data-overdrive');
+      document.body.classList.remove('is-overdrive');
+
+      if (activeFocusCard) {
+        activeFocusCard.classList.remove('section-overdrive-focus');
+        activeFocusCard = null;
+      }
+
+      if (hudCountdown) {
+        hudCountdown.classList.remove('is-active');
+      }
+
+      pushTelemetryLog(`<strong>[OVERDRIVE COMPLETE]</strong> 10s window elapsed :: Returning to standard baseline`, false);
+    }, 10000);
+  }
+
+
+  // ═════════════════════════════════════════════════════════════════
+  // 3. SECTION-SPECIFIC LIVE BACKGROUND CANVAS ANIMATION
+  // ═════════════════════════════════════════════════════════════════
+  let ctx = null;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let particles = [];
+  let currentSectionMode = 'home';
+
+  if (canvas) {
+    ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      initParticles();
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.floor(Math.min(canvasWidth, 1200) / 24);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvasWidth,
+          y: Math.random() * canvasHeight,
+          vx: (Math.random() - 0.5) * 0.7,
+          vy: (Math.random() - 0.5) * 0.7,
+          radius: Math.random() * 2 + 1,
+          alpha: Math.random() * 0.35 + 0.15
+        });
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+    resizeCanvas();
+
+    function renderCanvas() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      const isOverdrive = document.body.classList.contains('is-overdrive');
+      const speedMultiplier = isOverdrive ? 2.3 : 1;
+
+      // Color hues per section
+      let baseHue = 45; // Gold default
+      if (currentSectionMode === 'skills') baseHue = 195; // Cyan
+      else if (currentSectionMode === 'experience') baseHue = 345; // Rose/Crimson
+      else if (currentSectionMode === 'certs' || currentSectionMode === 'certificates') baseHue = 155; // Emerald
+      else if (currentSectionMode === 'education') baseHue = 220; // Blue
+      else if (currentSectionMode === 'contact') baseHue = 315; // Magenta
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        if (currentSectionMode === 'skills') {
+          // Matrix digital data drift upward
+          p.y -= (p.radius * 0.75) * speedMultiplier;
+          if (p.y < 0) p.y = canvasHeight;
+        } else if (currentSectionMode === 'experience') {
+          // Horizontal high-speed telemetry pulse
+          p.x += (p.radius * 1.3) * speedMultiplier;
+          if (p.x > canvasWidth) p.x = 0;
+        } else {
+          // Organic drift
+          p.x += p.vx * speedMultiplier;
+          p.y += p.vy * speedMultiplier;
+          if (p.x < 0) p.x = canvasWidth;
+          if (p.x > canvasWidth) p.x = 0;
+          if (p.y < 0) p.y = canvasHeight;
+          if (p.y > canvasHeight) p.y = 0;
+        }
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * (isOverdrive ? 1.4 : 1), 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${baseHue}, 90%, 65%, ${p.alpha * (isOverdrive ? 1.6 : 1)})`;
+        ctx.shadowBlur = isOverdrive ? 14 : 5;
+        ctx.shadowColor = `hsla(${baseHue}, 90%, 60%, 0.8)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Connecting constellation threads in home & education modes
+        if (currentSectionMode === 'home' || currentSectionMode === 'about' || currentSectionMode === 'education') {
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (dist < 90) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `hsla(${baseHue}, 90%, 65%, ${(1 - dist / 90) * 0.15 * (isOverdrive ? 2 : 1)})`;
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      requestAnimationFrame(renderCanvas);
+    }
+
+    requestAnimationFrame(renderCanvas);
+  }
+
+
+  // ═════════════════════════════════════════════════════════════════
+  // 4. MOUSE DRAG CHROMATIC INTERACTION (LIQUID PRISMATIC FLOW)
+  // ═════════════════════════════════════════════════════════════════
+  let isDragging = false;
+  let dragHue = 45;
+
+  document.addEventListener('mousedown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+    isDragging = true;
+    document.body.classList.add('is-mouse-dragging');
+    updateDragPosition(e);
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    updateDragPosition(e);
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false;
+      document.body.classList.remove('is-mouse-dragging');
+    }
+  });
+
+  function updateDragPosition(e) {
+    if (dragSpotlight) {
+      dragSpotlight.style.left = `${e.clientX}px`;
+      dragSpotlight.style.top = `${e.clientY}px`;
+    }
+
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
+    dragHue = (angle + 360) % 360;
+
+    document.body.style.setProperty('--drag-hue', dragHue.toFixed(1));
+    document.body.style.setProperty('--drag-angle', `${angle.toFixed(1)}deg`);
+  }
+
+
+  // ═════════════════════════════════════════════════════════════════
+  // 5. PAGE CONTEXT DETECTION & WATERMARK MORPHING
   // ═════════════════════════════════════════════════════════════════
   const pagePath = window.location.pathname.toLowerCase();
   let defaultWatermark = "ABDUL RAFAY";
@@ -122,22 +383,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.setAttribute('data-page', 'skills');
     defaultWatermark = "TECHNICAL ARSENAL";
     activeThemeClass = "theme-skills";
+    currentSectionMode = 'skills';
   } else if (pagePath.includes('experience')) {
     document.body.setAttribute('data-page', 'experience');
     defaultWatermark = "WORK & PROJECTS";
     activeThemeClass = "theme-experience";
+    currentSectionMode = 'experience';
   } else if (pagePath.includes('education')) {
     document.body.setAttribute('data-page', 'education');
     defaultWatermark = "ACADEMIC MATRIX";
     activeThemeClass = "theme-education";
+    currentSectionMode = 'education';
   } else if (pagePath.includes('contact')) {
     document.body.setAttribute('data-page', 'contact');
     defaultWatermark = "DIRECT CHANNELS";
     activeThemeClass = "theme-contact";
+    currentSectionMode = 'contact';
   } else {
     document.body.setAttribute('data-page', 'home');
     defaultWatermark = "ABDUL RAFAY";
     activeThemeClass = "";
+    currentSectionMode = 'home';
   }
 
   if (activeThemeClass) {
@@ -161,15 +427,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 3. REACTIVE NAVBAR DRIFT & ATMOSPHERE SHIFT ON HOVER
+  // 6. REACTIVE NAVBAR DRIFT & ATMOSPHERE SHIFT ON HOVER
   // ═════════════════════════════════════════════════════════════════
   const navLinks = document.querySelectorAll('.nav-link, .nav-brand');
   const themeMap = {
-    'index.html': { text: 'ABDUL RAFAY', theme: '' },
-    'skills.html': { text: 'TECHNICAL ARSENAL', theme: 'theme-skills' },
-    'experience.html': { text: 'WORK & PROJECTS', theme: 'theme-experience' },
-    'education.html': { text: 'ACADEMIC MATRIX', theme: 'theme-education' },
-    'contact.html': { text: 'DIRECT CHANNELS', theme: 'theme-contact' }
+    'index.html': { text: 'ABDUL RAFAY', theme: '', cat: 'about' },
+    'skills.html': { text: 'TECHNICAL ARSENAL', theme: 'theme-skills', cat: 'skills' },
+    'experience.html': { text: 'WORK & PROJECTS', theme: 'theme-experience', cat: 'experience' },
+    'education.html': { text: 'ACADEMIC MATRIX', theme: 'theme-education', cat: 'education' },
+    'contact.html': { text: 'DIRECT CHANNELS', theme: 'theme-contact', cat: 'contact' }
   };
 
   navLinks.forEach(link => {
@@ -179,7 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (match) {
       link.addEventListener('mouseenter', () => {
         morphWatermark(match.text);
-        // Temporarily shift atmospheric glow
         document.body.classList.remove('theme-skills', 'theme-experience', 'theme-education', 'theme-contact');
         if (match.theme) document.body.classList.add(match.theme);
       });
@@ -189,12 +454,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('theme-skills', 'theme-experience', 'theme-education', 'theme-contact');
         if (activeThemeClass) document.body.classList.add(activeThemeClass);
       });
+
+      link.addEventListener('click', () => {
+        triggerOverdrive(match.cat, link);
+      });
     }
   });
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 4. FRONTEND KINETIC CLICK SHOCKWAVE RIPPLES
+  // 7. FRONTEND KINETIC CLICK SHOCKWAVES & OVERDRIVE HOOK
   // ═════════════════════════════════════════════════════════════════
   const rippleSelectors = [
     '.btn',
@@ -230,27 +499,38 @@ document.addEventListener('DOMContentLoaded', () => {
       el.appendChild(ripple);
       setTimeout(() => ripple.remove(), 750);
 
-      // Trigger contextual telemetry based on clicked element
+      // Contextual overdrive mapping
+      let cat = currentSectionMode;
       const text = el.textContent.trim();
-      if (el.classList.contains('pill')) {
+
+      if (el.classList.contains('pill') || el.closest('.card-grid') || pagePath.includes('skills')) {
+        cat = 'skills';
         pushTelemetryLog(`<strong>[STACK-NODE]</strong> Verified capability: <code>${text}</code>`, false);
-      } else if (el.classList.contains('nav-link')) {
-        pushTelemetryLog(`<strong>[ROUTER]</strong> Navigating to: <strong>${text}</strong>`, true);
-      } else if (el.classList.contains('contact-box') || el.classList.contains('contact-chip')) {
+      } else if (el.classList.contains('contact-box') || el.classList.contains('contact-chip') || pagePath.includes('contact')) {
+        cat = 'contact';
         pushTelemetryLog(`<strong>[HANDSHAKE]</strong> External communication bridge active`, true);
-      } else if (el.classList.contains('timeline-card')) {
-        pushTelemetryLog(`<strong>[OPERATIONS]</strong> Queried commercial track record record`, false);
-      } else if (el.classList.contains('edu-card')) {
+      } else if (el.classList.contains('timeline-card') || pagePath.includes('experience')) {
+        cat = 'experience';
+        pushTelemetryLog(`<strong>[OPERATIONS]</strong> Queried commercial track record`, false);
+      } else if (el.classList.contains('cert-card') || el.closest('.cert-section')) {
+        cat = 'certs';
+        pushTelemetryLog(`<strong>[CREDENTIAL]</strong> Verified credential inspected`, true);
+      } else if (el.classList.contains('edu-card') || pagePath.includes('education')) {
+        cat = 'education';
         pushTelemetryLog(`<strong>[ACADEMIC]</strong> Qarshi University BSCS verification valid`, false);
       } else if (el.classList.contains('hero-photo-ring')) {
+        cat = 'about';
         pushTelemetryLog(`<strong>[IDENTITY]</strong> Abdul Rafay :: CS Candidate :: Lahore, PK`, true);
       }
+
+      // Trigger 10-second overdrive on click!
+      triggerOverdrive(cat, el);
     });
   });
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 5. 3D CARD MOUSE PERSPECTIVE TILT & SPOTLIGHT ILLUMINATION
+  // 8. 3D CARD MOUSE PERSPECTIVE TILT & SPOTLIGHT ILLUMINATION
   // ═════════════════════════════════════════════════════════════════
   const tiltCards = document.querySelectorAll(
     '.quick-hub-card, .content-card, .timeline-card, .edu-card, .contact-box, .cert-card'
@@ -287,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 6. INTERACTIVE SKILL FILTERS (ON SKILLS.HTML)
+  // 9. INTERACTIVE SKILL FILTERS (ON SKILLS.HTML)
   // ═════════════════════════════════════════════════════════════════
   const filterBtns = document.querySelectorAll('.filter-btn');
   const skillCards = document.querySelectorAll('.content-card[data-category]');
@@ -297,45 +577,35 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', () => {
         const cat = btn.getAttribute('data-filter');
 
-        // Update active filter button
         filterBtns.forEach(b => b.classList.remove('is-active'));
         btn.classList.add('is-active');
 
-        // Filter cards
         skillCards.forEach(card => {
           const cardCat = card.getAttribute('data-category');
           if (cat === 'all' || cardCat === cat) {
             card.classList.remove('is-hidden');
             card.classList.remove('is-filtered');
-            void card.offsetWidth; // Force reflow
+            void card.offsetWidth;
             card.classList.add('is-filtered');
           } else {
             card.classList.add('is-hidden');
           }
         });
 
-        // Trigger dynamic aura color shift based on filter
-        document.body.classList.remove('theme-skills', 'theme-experience', 'theme-education', 'theme-contact');
-        if (cat === 'cs') {
-          document.body.classList.add('theme-skills');
-          pushTelemetryLog(`<strong>[FILTER-ENG]</strong> Categorized view: Core CS &amp; Systems :: High priority`, true);
-        } else if (cat === 'web') {
-          document.body.classList.add('theme-experience');
-          pushTelemetryLog(`<strong>[FILTER-ENG]</strong> Categorized view: Web &amp; Frontend Architecture`, true);
-        } else if (cat === 'growth') {
-          document.body.classList.add('theme-education');
-          pushTelemetryLog(`<strong>[FILTER-ENG]</strong> Categorized view: E-Commerce &amp; Growth Systems`, true);
-        } else {
-          document.body.classList.add('theme-skills');
-          pushTelemetryLog(`<strong>[FILTER-ENG]</strong> Showing full stack matrix (All 21 competencies)`, false);
-        }
+        // Trigger 10-second overdrive corresponding to filter category
+        let odCat = 'skills';
+        if (cat === 'cs') odCat = 'skills';
+        else if (cat === 'web') odCat = 'experience';
+        else if (cat === 'growth') odCat = 'education';
+
+        triggerOverdrive(odCat, btn);
       });
     });
   }
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 7. ELASTIC CERTIFICATE LIGHTBOX MODAL
+  // 10. ELASTIC CERTIFICATE LIGHTBOX MODAL
   // ═════════════════════════════════════════════════════════════════
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxTitle = document.getElementById('lightboxTitle');
@@ -354,6 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxModal.classList.add('is-open');
     lightboxModal.setAttribute('aria-hidden', 'false');
 
+    triggerOverdrive('certs');
     pushTelemetryLog(`<strong>[STORAGE-CDN]</strong> Lightbox opened: <em>${title}</em>`, true);
   }
 
@@ -384,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ═════════════════════════════════════════════════════════════════
-  // 8. INITIAL PAGE WELCOME TELEMETRY
+  // 11. INITIAL WELCOME TELEMETRY
   // ═════════════════════════════════════════════════════════════════
   setTimeout(() => {
     if (pagePath.includes('skills')) {

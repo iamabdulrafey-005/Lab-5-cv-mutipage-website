@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul Rafay — Full-Stack Developer & Tech Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Global Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="brand-name">ABDUL RAFAY</span>
+        <span class="brand-sep">/</span>
+        <span class="brand-tag">DEVELOPER</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link is-active">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="skills.html" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Skills</span>
+        </a>
+        <a href="experience.html" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span>Experience</span>
+        </a>
+        <a href="education.html" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Education</span>
+        </a>
+        <a href="contact.html" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Contact</span>
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="availability-pill">
+          <span class="status-dot"></span>
+          <span>Available</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    
+    <!-- Hero Section with Headshot -->
+    <section class="hero-split">
+      <div class="hero-photo-col">
+        <div class="hero-photo-ring">
+          <div class="hero-photo-wrapper">
+            <img
+              src="./profile.jpg"
+              alt="Abdul Rafay - Software Developer & CS Student"
+              class="hero-photo"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="hero-photo-fallback" aria-hidden="true">AR</div>
+          </div>
+        </div>
+        <div class="hero-photo-caption">
+          <span class="status-dot"></span>
+          Available for Opportunities
+        </div>
+      </div>
+
+      <div class="hero-text-col">
+        <h1 class="hero-name">ABDUL <span class="hero-name--accent">RAFAY</span></h1>
+        <p class="hero-subtitle">5th Semester BSCS Student &bull; Full-Stack Developer &amp; Tech Specialist</p>
+
+        <p class="hero-bio">
+          Motivated software developer with hands-on experience in C, C++, Java (OOP), and HTML/CSS, backed by solid foundations in Data Structures and Algorithms (DSA). Experienced in building responsive web layouts, managing Shopify storefronts, and executing digital campaigns.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="experience.html" class="btn btn--primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            View Experience
+          </a>
+          <a href="skills.html" class="btn btn--outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Explore Skills
+          </a>
+          <a href="contact.html" class="btn btn--ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Me
+          </a>
+        </div>
+
+        <div class="hero-contact-bar">
+          <a href="tel:+923184504766" class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +92 318 4504766
+          </a>
+          <a href="mailto:abdulrafey5931@gmail.com" class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            abdulrafey5931@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/abdul-rafay2005" target="_blank" rel="noopener noreferrer" class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn Profile
+          </a>
+          <span class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Samnabad, Lahore, PK
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Hub Cards -->
+    <div class="quick-hub-grid">
+      <div class="quick-hub-card">
+        <div class="hub-head">
+          <div class="hub-icon hub-icon--gold">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h2 class="hub-title">Technical Skills</h2>
+        </div>
+        <p class="hub-desc">C, C++, Java OOP, Data Structures, Modern HTML/CSS, and Shopify e-commerce mastery.</p>
+        <a href="skills.html" class="hub-link">
+          <span>View Skills Matrix</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="quick-hub-card">
+        <div class="hub-head">
+          <div class="hub-icon hub-icon--rose">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h2 class="hub-title">Work &amp; Projects</h2>
+        </div>
+        <p class="hub-desc">Shopify store optimization, Java Swing apps, algorithmic engineering, and a 40% growth boost.</p>
+        <a href="experience.html" class="hub-link">
+          <span>View Experience</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="quick-hub-card">
+        <div class="hub-head">
+          <div class="hub-icon hub-icon--violet">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h2 class="hub-title">Education</h2>
+        </div>
+        <p class="hub-desc">BSCS 5th Semester at Qarshi University, Pre-Engineering at Punjab College, and academic milestones.</p>
+        <a href="education.html" class="hub-link">
+          <span>View Education</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2025 Abdul Rafay. All rights reserved.</span>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <span class="footer-sep">&bull;</span>
+        <a href="skills.html">Skills</a>
+        <span class="footer-sep">&bull;</span>
+        <a href="experience.html">Experience</a>
+        <span class="footer-sep">&bull;</span>
+        <a href="education.html">Education</a>
+        <span class="footer-sep">&bull;</span>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const hb = document.querySelector('.hamburger');
+      const nl = document.getElementById('navLinks');
+      const exp = hb.getAttribute('aria-expanded') === 'true';
+      hb.setAttribute('aria-expanded', !exp);
+      hb.classList.toggle('is-active');
+      nl.classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
